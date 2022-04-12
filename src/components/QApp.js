@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import QuestionAnswerPage from "./QuestionAnswerPage";
+import ResultsPage from "./ResultsPage";
 
 export default function QApp(){
 
     const data = [
         {
-            question: 'Whats the Capital of Sri Lanka',
+            questionText: 'Whats the Capital of Sri Lanka',
             answers: [
                 'Colombo',
                 'Sri Jayawardanapura',
@@ -14,7 +16,7 @@ export default function QApp(){
             correctAnswerIndex: 1
         },
         {
-            question: 'When did sri lanka recieved the independance',
+            questionText: 'When did sri lanka recieved the independance',
             answers: [
                 '1948',
                 '1950',
@@ -24,7 +26,7 @@ export default function QApp(){
             correctAnswerIndex: 0
         },
         {
-            question: 'Whats the ABC',
+            questionText: 'Whats the ABC',
             answers: [
                 'A',
                 'B',
@@ -65,26 +67,8 @@ export default function QApp(){
             <h1>Q App</h1>
 
             {
-                !gameOver ? <div>
-                        <h2>{ data[currentIndex].question  }</h2>
-
-                        <ul>
-
-                            {
-                            
-                                data[currentIndex].answers.map((answer, index)=>{
-                                    return <li key={index} onClick={ ()=>handleAnswerSelection(index) } > {answer} </li>
-                                })
-                            
-                            }
-                        </ul>
-
-                </div> : <div>
-                            <h1>Game Over</h1>
-                            <h3>You Scored : {score}</h3>
-                            <br/>
-                            <button onClick={replay}>Replay</button>
-                </div>
+                !gameOver ? <QuestionAnswerPage question={data[currentIndex]}  handleAnswerSelection={handleAnswerSelection} />
+                 : <ResultsPage score={score} replay={replay} />
             }
             
         </div>
